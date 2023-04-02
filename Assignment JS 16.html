@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+        background: #e0e0e0;
+        /* box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff; */
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        vertical-align: middle;
+        margin-top: 12rem;
+      }
+      section {
+        background-color: #c7e0f8;
+        color: #0776de;
+        text-align: center;
+        padding: 10px;
+        width: 450px;
+        height: 300px;
+        border-radius: 5px;
+        margin: 3px;
+        display: inline-block;
+        border-radius: 38px;
+        background: #e0e0e0;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+      span {
+        background-color: #c7e0f8;
+        color: #0776de;
+        padding: 10px;
+        width: 60px;
+        border-radius: 5px;
+        margin: 3px 10px;
+        display: inline-block;
+        border-radius: 38px;
+        background: #e0e0e0;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+      .innerbox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px;
+        margin-bottom: 40px;
+        font-size: 35px;
+        letter-spacing: 2px;
+      }
+
+      #start {
+        font-size: 22px;
+        border: none;
+        background-color: #2e80b3;
+        color: white;
+        width: 140px;
+        margin-right: 10px;
+        height: 55px;
+        border-radius: 33px;
+        transition: 0.3s;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+      #start:hover {
+        background: #02ff02;
+        color: black;
+        border-radius: 38px;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+      #stop {
+        font-size: 22px;
+        border: none;
+        background-color: #ae7617;
+        color: white;
+        width: 140px;
+        height: 55px;
+        border-radius: 33px;
+        transition: 0.3s;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+      #stop:hover {
+        background: rgba(255, 0, 0, 0.966);
+        color: black;
+        border-radius: 38px;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+      #reset {
+        font-size: 22px;
+        border: none;
+        background-color: #b32e2e;
+        margin-top: 10px;
+        color: white;
+        width: 140px;
+        height: 55px;
+        border-radius: 33px;
+        transition: 0.3s;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+      #reset:hover {
+        background: #333;
+        color: #e0e0e0;
+        border-radius: 38px;
+        box-shadow: 6px -6px 8px #9d9d9d, -6px 6px 8px #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="main">
+      <div class="innerbox">
+        <span id="timerhrs">00 </span>
+        <span id="timermin">00</span>
+        <span id="timersec">00</span>
+      </div>
+      <div id="btns">
+        <button id="start" onclick="settime()">Start</button>
+        <button id="stop" onclick="stoptime()">Stop</button>
+        <button id="reset" onclick="reset()">Reset</button>
+      </div>
+    </section>
+
+    <script>
+      var timerhrs = document.querySelector("#timerhrs");
+      var timermin = document.querySelector("#timermin");
+      var timersec = document.querySelector("#timersec");
+      let sec = 0;
+      let min = 0;
+      let hrs = 0;
+      let timer;
+
+      function stopwatch() {
+        sec++;
+        if (sec == 60) {
+          sec = 0;
+          min++;
+          if (min == 60) {
+            min = 0;
+            hrs++;
+          }
+        }
+
+        let h = hrs < 10 ? "0" + hrs : hrs;
+        let m = min < 10 ? "0" + min : min;
+        let s = sec < 10 ? "0" + sec : sec;
+
+        timerhrs.innerHTML = h;
+        timermin.innerHTML = m;
+        timersec.innerHTML = s;
+      }
+
+      function settime() {
+        timer = setInterval(stopwatch, 1000);
+      }
+
+      function stoptime() {
+        clearInterval(timer);
+      }
+      function reset() {
+        clearInterval(timer);
+        sec = 0;
+        min = 0;
+        hrs = 0;
+
+        timerhrs.innerHTML = `00`;
+        timermin.innerHTML = `00`;
+        timersec.innerHTML = `00`;
+      }
+    </script>
+  </body>
+</html>
